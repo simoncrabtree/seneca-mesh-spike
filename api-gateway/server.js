@@ -25,6 +25,22 @@ server.route({
   }
 });
 
+server.route({
+  method: 'GET',
+  path:'/organisation', 
+  handler: function (request, reply) {
+    seneca.act({cmd:'getOrganisation'}, function(err, response, microservice) {
+      if(err)
+        return reply(Boom.serverTimeout(err))
+      
+      reply({
+        _microservice: microservice,
+        organisation: response
+      });
+    })
+  }
+});
+
 var seneca = require('seneca')()
 .use('mesh', {base: true, silent:true})
 .ready(function() {
