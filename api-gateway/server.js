@@ -9,11 +9,9 @@ server.connection({
   port: port 
 });
 
-server.route({
-  method: 'GET',
-  path:'/organisations', 
-  handler: function (request, reply) {
-    seneca.act({cmd:'listOrganisations'}, function(err, response, microservice) {
+function handle(command) {
+  return function (request, reply) {
+    seneca.act(command, function(err, response, microservice) {
       if(err)
         return reply(Boom.serverTimeout(err))
       
@@ -23,22 +21,18 @@ server.route({
       });
     })
   }
+}
+
+server.route({
+  method: 'GET',
+  path:'/organisations', 
+  handler: handle('cmd:listOrganisations')
 });
 
 server.route({
   method: 'GET',
-  path:'/organisation', 
-  handler: function (request, reply) {
-    seneca.act({cmd:'getOrganisation'}, function(err, response, microservice) {
-      if(err)
-        return reply(Boom.serverTimeout(err))
-      
-      reply({
-        _microservice: microservice,
-        organisation: response
-      });
-    })
-  }
+  path:'/organisation',
+  handler: handle('cmd:getOrganisation')
 });
 
 var seneca = require('seneca')()
