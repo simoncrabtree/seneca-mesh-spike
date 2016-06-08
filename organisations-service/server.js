@@ -1,4 +1,18 @@
+
 setTimeout(function(){
+
+  function listOrganisations(msg, done) {
+    done(null, {organisations: [{id:1, name:'Org 1'}]})
+  }
+
+  function getOrganisation(msg, done) {
+    done(null, {organisation: {id:1, name:'Org 1'}})
+  }
+
+  function createOrganisation(msg, done) {
+    done(null, {created: msg})
+  }
+
   require('seneca')({tag: 'organisations-service', silent: false})
   .use('mesh', {pins: [
     'cmd:listOrganisations',
@@ -6,13 +20,7 @@ setTimeout(function(){
     'cmd:createOrganisation'
     ]
   })
-  .add('cmd:listOrganisations', function(msg, done) {
-    done(null, {organisations: [{id:1, name:'Org 1'}]})
-  })
-  .add('cmd:getOrganisation', function(msg, done) {
-    done(null, {organisation: {id:1, name:'Org 1'}})
-  })
-  .add('cmd:createOrganisation', function(msg, done) {
-    done(null, {created: msg})
-  })
+  .add('cmd:listOrganisations', listOrganisations)
+  .add('cmd:getOrganisation', getOrganisation)
+  .add('cmd:createOrganisation', createOrganisation)
 }, 10000)
