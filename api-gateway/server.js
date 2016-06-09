@@ -9,6 +9,10 @@ server.connection({
   port: port
 })
 
+server.register({
+  register: require('h2o2')
+})
+
 function handle(command) {
   return function (request, reply) {
     seneca.act(command, request.payload, function(err, response, microservice) {
@@ -35,6 +39,14 @@ addRoute('GET', '/organisations', 'cmd:listOrganisations')
 addRoute('GET', '/organisation', 'cmd:getOrganisation')
 addRoute('POST', '/organisation', 'cmd:createOrganisation')
 addRoute('GET', '/users', 'cmd:listUsers')
+
+server.route({
+  method: 'GET',
+  path: '/forms',
+  handler: function(request, reply) {
+    return reply.proxy({host: 'localhost', port: 30001, protocol: 'http'})
+  }
+})
 
 var seneca = require('seneca')()
 .use('mesh', {base: true, silent:true})
