@@ -2,6 +2,7 @@ var users = []
 
 var commands = {
   'cmd:listUsers': function(msg, done) {
+    this.act('role:logging', {message: "listUsers WAS CALLED"}, function(err, response) {})
     done(null, {users: users})
   },
   'cmd:findUser': function(args, done) {
