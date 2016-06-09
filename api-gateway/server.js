@@ -50,7 +50,7 @@ server.route({
 })
 
 var seneca = require('seneca')({tag: 'api-gateway', silent: false})
-.use('mesh', {base: true, silent:true})
+.use('mesh', {})
 .ready(function() {
   server.start((err) => {
     if (err) {
