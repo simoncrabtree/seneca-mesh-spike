@@ -41,6 +41,12 @@ server.route({
   handler: handle('cmd:createOrganisation')
 })
 
+server.route({
+  method: 'GET',
+  path:'/users',
+  handler: handle('cmd:listUsers')
+})
+
 var seneca = require('seneca')()
 .use('mesh', {base: true, silent:true})
 .ready(function() {
