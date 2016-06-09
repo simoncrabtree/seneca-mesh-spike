@@ -39,6 +39,7 @@ addRoute('GET', '/organisations', 'cmd:listOrganisations')
 addRoute('GET', '/organisation', 'cmd:getOrganisation')
 addRoute('POST', '/organisation', 'cmd:createOrganisation')
 addRoute('GET', '/users', 'cmd:listUsers')
+addRoute('GET', '/user', 'cmd:findUser')
 
 server.route({
   method: 'GET',

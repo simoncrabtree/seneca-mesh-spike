@@ -1,8 +1,12 @@
+var numberOfCalls = 0;
+
 var commands = {
   'cmd:listOrganisations': function(msg, done) {
     done(null, {organisations: [{id:1, name:'Org 1'}]})
   },
   'cmd:getOrganisation': function(msg, done) {
+    numberOfCalls++;
+    console.log("CALLS=", numberOfCalls)
     done(null, {organisation: {id:1, name:'Org 1'}})
   },
   'cmd:createOrganisation': function(msg, done) {
