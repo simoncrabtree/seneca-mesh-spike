@@ -10,11 +10,9 @@ var commands = {
   }
 }
   
-setTimeout(function(){
-  var seneca = require('seneca')({tag: 'organisations-service', silent: false})
-  seneca.use('mesh', {pins: Object.keys(commands)})
+var seneca = require('seneca')({tag: 'organisations-service', silent: false})
+seneca.use('mesh', {pins: Object.keys(commands)})
 
-  for(var cmd in commands) {
-    seneca.add(cmd, commands[cmd])
-  }
-}, 10000)
+for(var cmd in commands) {
+  seneca.add(cmd, commands[cmd])
+}
