@@ -23,29 +23,18 @@ function handle(command) {
   }
 }
 
-server.route({
-  method: 'GET',
-  path:'/organisations', 
-  handler: handle('cmd:listOrganisations')
-})
+function addRoute(method, path, pattern) {
+  server.route({
+    method: method,
+    path: path,
+    handler: handle(pattern)
+  })
+}
 
-server.route({
-  method: 'GET',
-  path:'/organisation',
-  handler: handle('cmd:getOrganisation')
-})
-
-server.route({
-  method: 'POST',
-  path:'/organisation',
-  handler: handle('cmd:createOrganisation')
-})
-
-server.route({
-  method: 'GET',
-  path:'/users',
-  handler: handle('cmd:listUsers')
-})
+addRoute('GET', '/organisations', 'cmd:listOrganisations')
+addRoute('GET', '/organisation', 'cmd:getOrganisation')
+addRoute('POST', '/organisation', 'cmd:createOrganisation')
+addRoute('GET', '/users', 'cmd:listUsers')
 
 var seneca = require('seneca')()
 .use('mesh', {base: true, silent:true})
