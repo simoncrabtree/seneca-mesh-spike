@@ -15,7 +15,7 @@ server.register({
 
 function handle(command) {
   return function (request, reply) {
-    seneca.act(command, request.payload, function(err, response, microservice) {
+    seneca.act(command, request.payload || request.params, function(err, response, microservice) {
       if(err)
         return reply(Boom.serverTimeout(err))
       
@@ -39,7 +39,8 @@ addRoute('GET', '/organisations', 'cmd:listOrganisations')
 addRoute('GET', '/organisation', 'cmd:getOrganisation')
 addRoute('POST', '/organisation', 'cmd:createOrganisation')
 addRoute('GET', '/users', 'cmd:listUsers')
-addRoute('GET', '/user', 'cmd:findUser')
+addRoute('GET', '/users/{id}', 'cmd:findUser')
+addRoute('POST', '/users', 'cmd:registerUser')
 
 server.route({
   method: 'GET',

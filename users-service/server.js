@@ -1,11 +1,22 @@
+var users = []
+
 var commands = {
   'cmd:listUsers': function(msg, done) {
-    done(null, {users: [{id:1, name:'Steve'}, {id:2, name:'Andrew'}]})
+    done(null, {users: users})
   },
-  'cmd:findUser': function(msg, done) {
-    this.act('cmd:getOrganisation', function(err, response, microservice) {
-      done(null, {user: {id:3, name:'Paul', organisation: response.organisation}})
+  'cmd:findUser': function(args, done) {
+    var user = users.filter(function(u) {
+      return u.id === args.id
     })
+    this.act('cmd:getOrganisation', function(err, response, microservice) {
+      user.organisation = response.organisation
+      done(null, user)
+    })
+  },
+  'cmd:registerUser': function(msg, done) {
+    var newUser = {id: msg.id, name: msg.name}
+    users.push(newUser)
+    done(null, {newUser: newUser})
   }
 }
 
