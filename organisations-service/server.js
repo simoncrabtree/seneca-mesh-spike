@@ -1,26 +1,20 @@
-
-setTimeout(function(){
-
-  function listOrganisations(msg, done) {
+var commands = {
+  'cmd:listOrganisations': function(msg, done) {
     done(null, {organisations: [{id:1, name:'Org 1'}]})
-  }
-
-  function getOrganisation(msg, done) {
+  },
+  'cmd:getOrganisation': function(msg, done) {
     done(null, {organisation: {id:1, name:'Org 1'}})
-  }
-
-  function createOrganisation(msg, done) {
+  },
+  'cmd:createOrganisation': function(msg, done) {
     done(null, {created: msg})
   }
+}
+  
+setTimeout(function(){
+  var seneca = require('seneca')({tag: 'organisations-service', silent: false})
+  seneca.use('mesh', {pins: Object.keys(commands)})
 
-  require('seneca')({tag: 'organisations-service', silent: false})
-  .use('mesh', {pins: [
-    'cmd:listOrganisations',
-    'cmd:getOrganisation',
-    'cmd:createOrganisation'
-    ]
-  })
-  .add('cmd:listOrganisations', listOrganisations)
-  .add('cmd:getOrganisation', getOrganisation)
-  .add('cmd:createOrganisation', createOrganisation)
+  for(var cmd in commands) {
+    seneca.add(cmd, commands[cmd])
+  }
 }, 10000)
