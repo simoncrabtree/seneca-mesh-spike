@@ -7,5 +7,10 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js --seneca.log.all"
   },
-  "author": "Simon Crabtree"
+  "author": "Simon Crabtree",
+  "dependencies": {
+    "seneca": "^2.1.0",
+    "seneca-balance-client": "^0.5.0",
+    "seneca-mesh": "^0.7.0"
+  }
 }
