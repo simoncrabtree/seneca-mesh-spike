@@ -50,6 +50,14 @@ server.route({
   }
 })
 
+server.route({
+  method: 'GET',
+  path: '/info',
+  handler: function(request, reply) {
+    return reply({version: '1.0.0'})
+  }
+})
+
 var seneca = require('seneca')({tag: 'api-gateway', silent: false})
 .use('mesh', {})
 .ready(function() {
