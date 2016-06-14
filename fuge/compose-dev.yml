@@ -1,0 +1,3 @@
+meshbase:
+  build: ../mesh-base/
+  container_name: mesh-base
