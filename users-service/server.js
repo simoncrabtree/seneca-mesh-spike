@@ -11,7 +11,7 @@ var commands = {
     })
     this.act('cmd:getOrganisation', function(err, response, microservice) {
       user.organisation = response.organisation
-      done(null, user)
+      done(null, user[0])
     })
   },
   'cmd:registerUser': function(msg, done) {
