@@ -1,0 +1,19 @@
+{
+  "name": "users-service",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "build": "docker build -t simoncrabtree/users-service:latest ."
+  },
+  "author": "Simon Crabtree",
+  "dependencies": {
+    "hapi": "^13.4.1",
+    "seneca": "^2.1.0",
+    "seneca-balance-client": "^0.5.0",
+    "seneca-mesh": "^0.7.0"
+  },
+  "license": "ISC"
+}

@@ -10,3 +10,7 @@ organisationsService:
   build: ../organisations-service/
   container_name: organisations-service
   
+usersService:
+  build: ../users-service/
+  container_name: users-service
+  
