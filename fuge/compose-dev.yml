@@ -1,3 +1,12 @@
 meshbase:
   build: ../mesh-base/
   container_name: mesh-base
+
+apigateway:
+  build: ../api-gateway/
+  container_name: api-gateway
+
+organisationsService:
+  build: ../organisations-service/
+  container_name: organisations-service
+  
